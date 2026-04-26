@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pt.wikipedia.org)",
+      "WebSearch",
+      "WebFetch(domain:memoria.mackenzie.br)"
+    ]
+  }
+}

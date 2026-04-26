@@ -84,6 +84,78 @@ window.addEventListener('scroll', () => {
   startAuto();
 }());
 
+// ── ACERVO — ANIMAÇÕES E INTERATIVIDADE ──
+(function () {
+  // ── Entrada escalonada dos cards ──────────────────────
+  const cards = document.querySelectorAll('.acervo-card');
+
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = +entry.target.dataset.index || 0;
+        setTimeout(() => entry.target.classList.add('card--visible'), idx * 90);
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  cards.forEach(card => {
+    cardObserver.observe(card);
+    card.addEventListener('click', () => {
+      const query = card.dataset.query;
+      if (query) scrollToChatAndOpen(query);
+    });
+  });
+
+  // ── Contador animado ──────────────────────────────────
+  const statEls = document.querySelectorAll('.acervo-stat-number');
+  if (!statEls.length) return;
+
+  let countersStarted = false;
+  const statsRow = statEls[0].closest('.acervo-stats');
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !countersStarted) {
+      countersStarted = true;
+      statEls.forEach(el => animateCounter(el));
+      counterObserver.disconnect();
+    }
+  }, { threshold: 0.4 });
+
+  if (statsRow) counterObserver.observe(statsRow);
+}());
+
+function animateCounter(el) {
+  const target   = +el.dataset.target;
+  const duration = 1600;
+  const start    = performance.now();
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  (function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const value    = Math.round(easeOut(progress) * target);
+
+    if (target >= 10000) {
+      el.textContent = Math.round(value / 1000) + 'k+';
+    } else if (target >= 1000) {
+      el.textContent = value.toLocaleString('pt-BR') + '+';
+    } else {
+      el.textContent = String(value);
+    }
+
+    if (progress < 1) requestAnimationFrame(tick);
+  }(start));
+}
+
+function scrollToChatAndOpen(query) {
+  document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    openInlineChat();
+    if (query) setTimeout(() => sendQuickMsg(query), 480);
+  }, 650);
+}
+
 // ═══════════════════════════════════════════════════════
 // ORÁCULO — ESTADO
 // ═══════════════════════════════════════════════════════
@@ -160,14 +232,19 @@ function toggleChatModal() {
   overlay.classList.contains('visible') ? closeChatModal() : openChatModal();
 }
 
-function openChatModal() {
+function openChatModal(hintEl) {
   const overlay = document.getElementById('chatModalOverlay');
   const fab     = document.getElementById('chatFab');
   overlay.classList.add('visible');
   document.body.style.overflow = 'hidden';
   fab.querySelector('.chat-fab-icon-open').style.display  = 'none';
   fab.querySelector('.chat-fab-icon-close').style.display = '';
-  setTimeout(() => document.getElementById('chatModalInput').focus(), 380);
+  if (hintEl) {
+    const text = hintEl.textContent.trim();
+    setTimeout(() => sendModalQuickMsg(text), 420);
+  } else {
+    setTimeout(() => document.getElementById('chatModalInput').focus(), 380);
+  }
 }
 
 function closeChatModal() {
@@ -465,11 +542,11 @@ function processUserInput(text, ctx) {
 
   if (t.includes('contato') || t.includes('email') || t.includes('telefone') || t.includes('equipe')) {
     appendBotMessage(
-      `📬 <strong>Contato do Centro de Memória</strong><br><br>
-      E-mail: <em>centrodememoria@mackenzie.br</em><br>
-      Telefone: (11) 2114-8000<br>
-      Endereço: Rua da Consolação, 930 — Consolação, SP<br>
-      Horário: Segunda a Sexta, 9h–17h`,
+      `📬 <strong>Contato do Centro Histórico e Cultural Mackenzie</strong><br><br>
+      E-mail: <em>chcm@mackenzie.br</em><br>
+      Telefone: (11) 2114-8661<br>
+      Endereço: Rua Itambé, 135 — Higienópolis, São Paulo – SP<br>
+      Horário: Segunda a Sexta, 9h–19h`,
       ctx
     );
     return;
@@ -604,7 +681,7 @@ function confirmarAgendamento() {
       `✅ Visita agendada com sucesso!<br><br>
       📅 <strong>${agendaState.dataSelecionada}</strong> às <strong>${agendaState.horarioSelecionado}</strong><br>
       👤 <strong>${nome}</strong><br><br>
-      Nosso time aguarda sua visita no <em>Centro de Memória · Bloco A, Sala 12</em>. Um e-mail de confirmação foi enviado.`,
+      Nosso time aguarda sua visita no <em>Centro Histórico e Cultural Mackenzie · Rua Itambé, 135 — Higienópolis</em>. Um e-mail de confirmação foi enviado.`,
       scheduleCtx
     );
   }, 500);

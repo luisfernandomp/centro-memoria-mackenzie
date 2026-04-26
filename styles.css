@@ -502,52 +502,228 @@ section {
 
 /* ── ACERVO ── */
 .acervo {
-  background: var(--cinza-claro);
+  background: #0d0d0d;
+  position: relative;
+  overflow: hidden;
 }
 
+.acervo-bg-glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(191,0,55,0.14) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.acervo .section-inner { position: relative; z-index: 1; }
+
+.acervo .section-header h2 { color: var(--branco); }
+.acervo .section-header p  { color: rgba(255,255,255,0.5); }
+
+/* ── Stats bar ── */
+.acervo-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 3.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(4px);
+}
+
+.acervo-stat {
+  text-align: center;
+  padding: 1.75rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.acervo-stat:last-child { border-right: none; }
+
+.acervo-stat:hover { background: rgba(191,0,55,0.06); }
+
+.acervo-stat::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 50%;
+  height: 2px;
+  background: var(--vermelho);
+  border-radius: 2px 2px 0 0;
+  transition: transform 0.35s ease;
+  transform-origin: center;
+}
+
+.acervo-stat:hover::after { transform: translateX(-50%) scaleX(1); }
+
+.acervo-stat-number {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--branco);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.acervo-stat-label {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.38);
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ── Cards grid ── */
 .acervo-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
 }
 
 .card {
   background: var(--branco);
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 2rem 1.75rem;
   border-top: 3px solid var(--vermelho);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+/* ── Animated entrance ── */
+.acervo-card {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
+.acervo-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(191,0,55,0.05) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+.acervo-card.card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.acervo .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 56px rgba(191,0,55,0.18), 0 6px 20px rgba(0,0,0,0.14);
+}
+
+.acervo-card:hover::after { opacity: 1; }
+
+/* ── Icon ── */
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   background: rgba(191,0,55,0.08);
-  border-radius: 50%;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 1.25rem;
+  transition: background 0.28s, transform 0.28s;
+}
+
+.acervo-card:hover .card-icon {
+  background: rgba(191,0,55,0.16);
+  transform: scale(1.12) rotate(-5deg);
 }
 
 .card h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--preto);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
+  font-weight: 700;
 }
 
 .card p {
-  font-size: 0.875rem;
+  font-size: 0.86rem;
   color: var(--cinza-medio);
   font-family: 'Montserrat', sans-serif;
   line-height: 1.7;
+}
+
+/* ── Explore label ── */
+.card-explore {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--vermelho);
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+}
+
+.acervo-card:hover .card-explore {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── CTA ── */
+.acervo-cta {
+  text-align: center;
+}
+
+.btn-acervo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--vermelho);
+  color: var(--branco);
+  border: none;
+  padding: 0.9rem 2.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(191,0,55,0.45);
+}
+
+.btn-acervo-cta:hover {
+  background: var(--vermelho-escuro);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(191,0,55,0.55);
+}
+
+.acervo-cta-hint {
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
 }
 
 /* ── LINHA DO TEMPO ── */
@@ -1330,11 +1506,23 @@ footer a {
 
 footer a:hover { color: var(--vermelho-hover); }
 
+.footer-academic {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+  font-size: 0.775rem;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .acervo-stats { grid-template-columns: repeat(2, 1fr); }
+  .acervo-stat:nth-child(2) { border-right: none; }
+  .acervo-stat:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.07); }
   .acervo-cards { grid-template-columns: 1fr; }
+  .acervo-card { opacity: 1; transform: none; }
   .timeline::before { left: 18px; }
   .timeline-item,
   .timeline-item:nth-child(even) { flex-direction: row; }

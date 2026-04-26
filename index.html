@@ -107,7 +107,7 @@
             <div class="stat"><span class="stat-number">1870</span><span class="stat-label">Fundação</span></div>
             <div class="stat"><span class="stat-number">1896</span><span class="stat-label">Inst. Mackenzie</span></div>
             <div class="stat"><span class="stat-number">1952</span><span class="stat-label">Universidade</span></div>
-            <div class="stat"><span class="stat-number">2000</span><span class="stat-label">Presbiteriana</span></div>
+            <div class="stat"><span class="stat-number">1996</span><span class="stat-label">Inst. Presbiteriano</span></div>
           </div>
         </div>
       </div>
@@ -168,44 +168,83 @@
 
   <!-- ACERVO -->
   <section class="acervo" id="acervo">
+    <div class="acervo-bg-glow"></div>
     <div class="section-inner">
+
       <div class="section-header">
         <span class="section-tag">Coleções</span>
         <h2>Conheça nosso Acervo</h2>
         <p>Documentos originais, registros fotográficos e publicações que narram décadas de história</p>
       </div>
+
+      <div class="acervo-stats">
+        <div class="acervo-stat">
+          <span class="acervo-stat-number" data-target="80000">0k+</span>
+          <span class="acervo-stat-label">Documentos</span>
+        </div>
+        <div class="acervo-stat">
+          <span class="acervo-stat-number" data-target="5218">0</span>
+          <span class="acervo-stat-label">Fotografias</span>
+        </div>
+        <div class="acervo-stat">
+          <span class="acervo-stat-number" data-target="3100">0</span>
+          <span class="acervo-stat-label">Publicações</span>
+        </div>
+        <div class="acervo-stat">
+          <span class="acervo-stat-number" data-target="154">0</span>
+          <span class="acervo-stat-label">Anos de história</span>
+        </div>
+      </div>
+
       <div class="acervo-cards">
-        <div class="card">
+        <div class="card acervo-card" data-index="0" data-query="documentos históricos">
           <div class="card-icon">📜</div>
           <h3>Documentos Históricos</h3>
           <p>Atas, correspondências, relatórios e registros administrativos desde a fundação da instituição em 1870.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
-        <div class="card">
+        <div class="card acervo-card" data-index="1" data-query="fotografias históricas">
           <div class="card-icon">📷</div>
           <h3>Acervo Fotográfico</h3>
           <p>Mais de 5.000 fotografias que registram eventos, formandos, obras e a vida cotidiana do Mackenzie.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
-        <div class="card">
+        <div class="card acervo-card" data-index="2" data-query="publicações e periódicos">
           <div class="card-icon">📚</div>
           <h3>Publicações e Periódicos</h3>
           <p>Revistas, jornais, anuários e livros institucionais que documentam a produção intelectual da universidade.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
-        <div class="card">
+        <div class="card acervo-card" data-index="3" data-query="registros acadêmicos">
           <div class="card-icon">🎓</div>
           <h3>Registros Acadêmicos</h3>
           <p>Históricos escolares, diplomas e registros de alunos e docentes ao longo de mais de um século de ensino.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
-        <div class="card">
+        <div class="card acervo-card" data-index="4" data-query="cartografia e plantas arquitetônicas">
           <div class="card-icon">🗺️</div>
           <h3>Cartografia e Plantas</h3>
           <p>Plantas arquitetônicas e mapas que mostram a evolução do campus e das instalações ao longo das décadas.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
-        <div class="card">
+        <div class="card acervo-card" data-index="5" data-query="acervo oral depoimentos">
           <div class="card-icon">🎙️</div>
           <h3>Acervo Oral</h3>
           <p>Entrevistas e depoimentos de ex-alunos, professores e funcionários que vivenciaram momentos marcantes.</p>
+          <span class="card-explore">Pesquisar no acervo →</span>
         </div>
       </div>
+
+      <div class="acervo-cta">
+        <button class="btn-acervo-cta" onclick="scrollToChatAndOpen()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Pesquisar no Acervo Completo
+        </button>
+        <p class="acervo-cta-hint">ou converse com o Oráculo Digital</p>
+      </div>
+
     </div>
   </section>
 
@@ -246,12 +285,12 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">2000</div>
+          <div class="timeline-year">1996</div>
           <div class="timeline-dot"><div class="timeline-dot-ring"></div></div>
           <div class="timeline-content">
             <img src="./images/igreja.jpg" class="timeline-img-placeholder" />
-            <h4>Universidade Presbiteriana</h4>
-            <p>Incorpora à denominação o vínculo com a Igreja Presbiteriana do Brasil, reafirmando seus valores fundadores.</p>
+            <h4>Instituto Presbiteriano Mackenzie</h4>
+            <p>A entidade mantenedora passa a se chamar oficialmente Instituto Presbiteriano Mackenzie, reafirmando o vínculo histórico com a fé reformada.</p>
           </div>
         </div>
       </div>
@@ -276,10 +315,10 @@
           e descobrir documentos e registros históricos relevantes.
         </p>
         <div class="chat-cta-hints">
-          <span class="chat-hint" onclick="openChatWithHint(this)">📜 Documentos de 1870</span>
-          <span class="chat-hint" onclick="openChatWithHint(this)">📷 Acervo fotográfico</span>
-          <span class="chat-hint" onclick="openChatWithHint(this)">🎓 Registros acadêmicos</span>
-          <span class="chat-hint" onclick="openChatWithHint(this)">🏛️ Fundação da instituição</span>
+          <span class="chat-hint" onclick="openChatModal(this)">📜 Documentos de 1870</span>
+          <span class="chat-hint" onclick="openChatModal(this)">📷 Acervo fotográfico</span>
+          <span class="chat-hint" onclick="openChatModal(this)">🎓 Registros acadêmicos</span>
+          <span class="chat-hint" onclick="openChatModal(this)">🏛️ Fundação da instituição</span>
         </div>
         <button class="btn-open-chat" onclick="openChatModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -349,8 +388,13 @@
   <footer>
     <p>
       <strong>Centro de Memória Mackenzie</strong> · Universidade Presbiteriana Mackenzie<br>
-      Rua da Consolação, 930 — Consolação, São Paulo – SP · CEP 01302-907<br><br>
+      Rua Itambé, 135 — Higienópolis, São Paulo – SP · CEP 01239-902<br>
+      chcm@mackenzie.br · (11) 2114-8661 · Seg–Sex, 9h–19h<br><br>
       <a href="#">Política de Privacidade</a> · <a href="#">Contato</a> · <a href="#">Acessibilidade</a>
+    </p>
+    <p class="footer-academic">
+      Componente Curricular: <strong>Interação Humano‑Computador (IHC)</strong> · Turma: <strong>6N</strong><br>
+      Grupo: Luis Fernando de Mesquita Pereira · Edson Fu · Marcelo Luis Simone Lucas
     </p>
   </footer>
 
