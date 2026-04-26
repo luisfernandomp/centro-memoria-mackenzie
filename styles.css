@@ -20,19 +20,28 @@ body {
   font-family: 'Georgia', 'Times New Roman', serif;
   background-color: var(--creme);
   color: var(--cinza-escuro);
+  overflow-x: hidden;
 }
 
 /* ── NAV ── */
 nav {
-  background-color: var(--preto);
+  background-color: transparent;
   padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
-  position: sticky;
+  height: 118px;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  box-shadow: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav.nav-scrolled {
+  background-color: var(--preto);
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
@@ -44,16 +53,20 @@ nav {
 }
 
 .nav-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--vermelho);
-  border-radius: 50%;
+  width: 98px;
+  height: 98px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  color: var(--branco);
-  font-weight: bold;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.nav-logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .nav-logo-text {
@@ -92,10 +105,25 @@ nav {
   color: var(--vermelho-hover);
 }
 
-/* ── HERO ── */
-.hero {
-  background: linear-gradient(160deg, var(--preto) 0%, var(--vermelho-escuro) 55%, var(--vermelho) 100%);
-  min-height: 88vh;
+/* ── CAROUSEL ── */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,26 +132,89 @@ nav {
   padding: 4rem 2rem;
 }
 
-.hero::before {
+.carousel-slide::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 60px,
-      rgba(255,255,255,0.03) 60px,
-      rgba(255,255,255,0.03) 61px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 60px,
-      rgba(255,255,255,0.03) 60px,
-      rgba(255,255,255,0.03) 61px
-    );
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.03) 60px, rgba(255,255,255,0.03) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.03) 60px, rgba(255,255,255,0.03) 61px);
+  pointer-events: none;
 }
+
+.slide-1 {
+  background: linear-gradient(160deg, var(--preto) 0%, var(--vermelho-escuro) 55%, var(--vermelho) 100%);
+}
+
+.slide-2 {
+  background: linear-gradient(135deg, var(--vermelho-escuro) 0%, var(--preto) 60%, #1a0008 100%);
+}
+
+.slide-3 {
+  background: linear-gradient(200deg, var(--preto) 0%, #3d0010 45%, var(--vermelho-escuro) 100%);
+}
+
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--branco);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s, border-color 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.carousel-arrow:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.carousel-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+.carousel-prev { left: 1.5rem; }
+.carousel-next { right: 1.5rem; }
+
+/* Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.carousel-dot.active {
+  background: var(--branco);
+  transform: scale(1.35);
+}
+
+/* ── HERO (slides content) ── */
 
 .hero-content {
   position: relative;

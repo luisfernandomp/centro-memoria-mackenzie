@@ -1,5 +1,52 @@
 let chatOpen = false;
 
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').classList.toggle('nav-scrolled', window.scrollY > 10);
+});
+
+// ── CAROUSEL ──
+(function () {
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const total = dots.length;
+  let current = 0;
+  let autoTimer;
+
+  function slideWidth() {
+    return document.getElementById('carousel').offsetWidth;
+  }
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * slideWidth()}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 5000);
+  }
+
+  document.getElementById('carouselNext').addEventListener('click', () => { next(); startAuto(); });
+  document.getElementById('carouselPrev').addEventListener('click', () => { prev(); startAuto(); });
+  dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.index); startAuto(); }));
+
+  // Swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); startAuto(); }
+  });
+
+  window.addEventListener('resize', () => goTo(current));
+
+  startAuto();
+}());
+
 function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chatPanel');

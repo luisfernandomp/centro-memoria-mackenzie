@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-  <title>Centro de Memória Mackenzie</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" sizes="16x16"  href="./images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <title>Centro de Memória Mackenzie</title>
 </head>
 <body>
 
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <div class="nav-logo-icon">M</div>
+      <div class="nav-logo-icon">
+        <img src="./images/centro-memoria-logo.png" />
+      </div>
       <div class="nav-logo-text">
         Centro de Memória
-        <span>Universidade Presbiteriana Mackenzie</span>
       </div>
     </a>
     <ul class="nav-links">
@@ -25,39 +29,103 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">Desde 1870 · Preservando Memórias</div>
-      <h1>Centro de Memória<br><em>Mackenzie</em></h1>
-      <div class="hero-divider"></div>
-      <p class="hero-subtitle">Universidade Presbiteriana Mackenzie</p>
-      <p class="hero-description">
-        Guardamos a história, os documentos e as memórias que construíram mais de 150 anos
-        de educação, ciência e transformação social no Brasil.
-      </p>
-      <div class="hero-actions">
-        <a href="#acervo" class="btn-primary">Explorar o Acervo</a>
-        <a href="#chat" class="btn-outline">Falar com o Assistente</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-number">150+</span>
-          <span class="stat-label">Anos de história</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">80k+</span>
-          <span class="stat-label">Documentos</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">5k+</span>
-          <span class="stat-label">Fotografias</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">3k+</span>
-          <span class="stat-label">Publicações</span>
+  <!-- CAROUSEL -->
+  <section class="carousel" id="carousel">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- Slide 1 -->
+      <div class="carousel-slide slide-1">
+        <div class="hero-content">
+          <div class="hero-badge">Desde 1870 · Preservando Memórias</div>
+          <h1>Centro de Memória<br><em>Mackenzie</em></h1>
+          <div class="hero-divider"></div>
+          <p class="hero-subtitle">Universidade Presbiteriana Mackenzie</p>
+          <p class="hero-description">
+            Guardamos a história, os documentos e as memórias que construíram mais de 150 anos
+            de educação, ciência e transformação social no Brasil.
+          </p>
+          <div class="hero-actions">
+            <a href="#acervo" class="btn-primary">Explorar o Acervo</a>
+            <a href="#chat" class="btn-outline">Falar com o Assistente</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-number">150+</span><span class="stat-label">Anos de história</span></div>
+            <div class="stat"><span class="stat-number">80k+</span><span class="stat-label">Documentos</span></div>
+            <div class="stat"><span class="stat-number">5k+</span><span class="stat-label">Fotografias</span></div>
+            <div class="stat"><span class="stat-number">3k+</span><span class="stat-label">Publicações</span></div>
+          </div>
         </div>
       </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide slide-2">
+        <div class="hero-content">
+          <div class="hero-badge">Coleção Histórica · Acervo Digital</div>
+          <h1>80.000+ Documentos<br><em>Preservados</em></h1>
+          <div class="hero-divider"></div>
+          <p class="hero-subtitle">Atas, fotografias, publicações e registros</p>
+          <p class="hero-description">
+            Do século XIX à atualidade, nosso acervo reúne correspondências originais,
+            registros acadêmicos, plantas arquitetônicas e depoimentos que narram a
+            construção de uma das maiores universidades do Brasil.
+          </p>
+          <div class="hero-actions">
+            <a href="#acervo" class="btn-primary">Conhecer o Acervo</a>
+            <a href="#historia" class="btn-outline">Ver Linha do Tempo</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-number">80k+</span><span class="stat-label">Documentos</span></div>
+            <div class="stat"><span class="stat-number">5k+</span><span class="stat-label">Fotografias</span></div>
+            <div class="stat"><span class="stat-number">3k+</span><span class="stat-label">Publicações</span></div>
+            <div class="stat"><span class="stat-number">6</span><span class="stat-label">Coleções</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide slide-3">
+        <div class="hero-content">
+          <div class="hero-badge">1870 – Presente · 154 Anos</div>
+          <h1>Uma Trajetória que<br><em>Moldou o Brasil</em></h1>
+          <div class="hero-divider"></div>
+          <p class="hero-subtitle">Da Escola Americana à Universidade Presbiteriana</p>
+          <p class="hero-description">
+            Fundada por George e Mary Chamberlain, a instituição atravessou mais de
+            um século e meio transformando vidas, formando líderes e construindo
+            uma das memórias mais ricas da educação brasileira.
+          </p>
+          <div class="hero-actions">
+            <a href="#historia" class="btn-primary">Explorar a História</a>
+            <a href="#chat" class="btn-outline">Perguntar ao Assistente</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-number">1870</span><span class="stat-label">Fundação</span></div>
+            <div class="stat"><span class="stat-number">1896</span><span class="stat-label">Inst. Mackenzie</span></div>
+            <div class="stat"><span class="stat-number">1952</span><span class="stat-label">Universidade</span></div>
+            <div class="stat"><span class="stat-number">2000</span><span class="stat-label">Presbiteriana</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Arrows -->
+    <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Slide anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+      <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+      <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
     </div>
   </section>
 
