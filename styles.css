@@ -1377,3 +1377,446 @@ footer a:hover { color: var(--vermelho-hover); }
     height: 54px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   ORÁCULO — MENSAGEM COM AVATAR
+════════════════════════════════════════════════════════ */
+.msg-bot-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.bot-avatar {
+  width: 30px;
+  height: 30px;
+  background: var(--vermelho);
+  color: var(--branco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bot-avatar img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.msg-bot .msg-time {
+  padding-left: calc(30px + 0.5rem);
+}
+
+/* ── QUICK REPLIES ── */
+.quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+}
+
+.quick-reply-btn {
+  background: var(--branco);
+  border: 1.5px solid var(--vermelho);
+  color: var(--vermelho);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.quick-reply-btn:hover:not(:disabled) {
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+/* ── RICH CARD DE DOCUMENTO ── */
+.doc-card {
+  background: var(--branco);
+  border: 1px solid #e8e4df;
+  border-radius: 10px;
+  border-left: 3px solid var(--vermelho);
+  padding: 1rem 1.1rem;
+  max-width: 340px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.doc-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.doc-type-badge {
+  background: var(--vermelho);
+  color: var(--branco);
+  font-size: 0.62rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+.doc-year {
+  color: var(--cinza-medio);
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.doc-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--preto);
+  line-height: 1.4;
+  margin-bottom: 0.45rem;
+}
+
+.doc-description {
+  font-size: 0.77rem;
+  color: var(--cinza-medio);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.doc-card-footer {
+  border-top: 1px solid #eee;
+  padding-top: 0.65rem;
+}
+
+.doc-ref-text {
+  display: block;
+  font-size: 0.67rem;
+  color: #b0a9a2;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-action {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: var(--cinza-medio);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.btn-action:hover {
+  background: var(--vermelho);
+  border-color: var(--vermelho);
+  color: var(--branco);
+}
+
+/* ═══════════════════════════════════════════════════════
+   OVERLAY DE AGENDAMENTO
+════════════════════════════════════════════════════════ */
+.agenda-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: agendaFadeIn 0.22s ease;
+}
+
+@keyframes agendaFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.agenda-modal {
+  background: var(--branco);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  overflow: hidden;
+  animation: agendaSlideIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes agendaSlideIn {
+  from { transform: translateY(28px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.agenda-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #eeebe7;
+  background: #fafaf8;
+}
+
+.agenda-modal-header h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  color: var(--preto);
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.agenda-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--cinza-medio);
+  cursor: pointer;
+  line-height: 1;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+
+.agenda-close-btn:hover { background: #f0f0f0; }
+
+.agenda-back-btn {
+  background: none;
+  border: none;
+  font-size: 0.82rem;
+  color: var(--cinza-medio);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+
+.agenda-back-btn:hover { background: #f0f0f0; }
+
+.agenda-modal-body {
+  padding: 1.5rem;
+}
+
+.agenda-step-label {
+  font-size: 0.875rem;
+  color: var(--cinza-medio);
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 1rem;
+}
+
+/* ── Grade de datas ── */
+.agenda-dates {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.agenda-date-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 0.3rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  background: var(--branco);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.agenda-date-btn:not(:disabled):hover {
+  border-color: var(--vermelho);
+  background: rgba(191,0,55,0.04);
+}
+
+.agenda-date-btn.selected {
+  border-color: var(--vermelho);
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+.agenda-date-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  background: #f8f8f8;
+}
+
+.agenda-date-day {
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.agenda-date-weekday {
+  font-size: 0.65rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+
+.agenda-date-btn.selected .agenda-date-weekday { opacity: 0.85; }
+
+/* ── Grade de horários ── */
+.agenda-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.agenda-time-btn {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  background: var(--branco);
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.agenda-time-btn:hover { border-color: var(--vermelho); background: rgba(191,0,55,0.04); }
+
+.agenda-time-btn.selected {
+  border-color: var(--vermelho);
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+/* ── Formulário ── */
+.agenda-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.agenda-input {
+  width: 100%;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.18s;
+  background: #fafaf8;
+}
+
+.agenda-input:focus {
+  border-color: var(--vermelho);
+  background: var(--branco);
+}
+
+/* ── Footer ── */
+.agenda-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eeebe7;
+  background: #fafaf8;
+}
+
+.agenda-btn-primary {
+  background: var(--vermelho);
+  color: var(--branco);
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.agenda-btn-primary:hover:not(:disabled) { background: var(--vermelho-escuro); }
+
+.agenda-btn-primary:disabled { opacity: 0.42; cursor: not-allowed; }
+
+.agenda-btn-secondary {
+  background: transparent;
+  color: var(--cinza-medio);
+  border: 1px solid #ddd;
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.agenda-btn-secondary:hover { background: #f5f5f5; border-color: #bbb; }
+
+/* ── Tela de Sucesso ── */
+.agenda-sucesso {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.agenda-sucesso-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.agenda-sucesso h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--preto);
+  margin-bottom: 1.5rem;
+}
+
+.agenda-sucesso-details {
+  background: #f8f7f5;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 3px solid var(--vermelho);
+}
+
+.agenda-sucesso-details p {
+  font-size: 0.875rem;
+  color: var(--cinza-escuro);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.agenda-sucesso-info {
+  font-size: 0.8rem;
+  color: var(--cinza-medio);
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .agenda-dates { grid-template-columns: repeat(5, 1fr); }
+  .agenda-modal { max-width: 100%; }
+  .agenda-overlay { padding: 0.75rem; }
+}

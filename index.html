@@ -322,16 +322,7 @@
 
           <!-- Área de chat -->
           <div class="chat-main">
-            <div class="chat-main-messages" id="chatMessages">
-              <div class="msg msg-bot">
-                <div class="msg-bubble">
-                  Olá! Sou o assistente do Centro de Memória Mackenzie. 📚<br><br>
-                  Posso ajudá-lo a pesquisar documentos históricos, fotografias, publicações e responder perguntas sobre a trajetória da universidade.<br><br>
-                  O que você gostaria de saber?
-                </div>
-                <div class="msg-time">Agora</div>
-              </div>
-            </div>
+            <div class="chat-main-messages" id="chatMessages"></div>
             <div class="chat-main-input">
               <textarea
                 class="chat-input"
@@ -381,10 +372,11 @@
         <!-- Sidebar -->
         <div class="chat-sidebar chat-modal-sidebar">
           <div class="chat-sidebar-header">
-            <div class="chat-sidebar-avatar">M</div>
+            <div class="chat-sidebar-avatar">
+                <img src="./images/centro-memoria-logo.png" />
+            </div>
             <div>
-              <strong>Assistente Mackenzie</strong>
-              <span>Oráculo Digital · RAG</span>
+              <strong>Oráculo Digital</strong>
             </div>
           </div>
           <div class="chat-sidebar-info">
@@ -415,16 +407,7 @@
               </svg>
             </button>
           </div>
-          <div class="chat-main-messages" id="chatModalMessages">
-            <div class="msg msg-bot">
-              <div class="msg-bubble">
-                Olá! Sou o assistente do Centro de Memória Mackenzie. 📚<br><br>
-                Posso ajudá-lo a pesquisar documentos históricos, fotografias, publicações e responder perguntas sobre a trajetória da universidade.<br><br>
-                O que você gostaria de saber?
-              </div>
-              <div class="msg-time">Agora</div>
-            </div>
-          </div>
+          <div class="chat-main-messages" id="chatModalMessages"></div>
           <div class="chat-main-input">
             <textarea
               class="chat-input"
@@ -444,6 +427,93 @@
       </div>
     </div>
   </div>
+
+  <!-- Template: Rich Card de Documento -->
+  <template id="tplDocCard">
+    <div class="doc-card">
+      <div class="doc-card-header">
+        <span class="doc-type-badge"></span>
+        <span class="doc-year"></span>
+      </div>
+      <div class="doc-title"></div>
+      <div class="doc-description"></div>
+      <div class="doc-card-footer">
+        <span class="doc-ref-text"></span>
+        <div class="doc-actions">
+          <button class="btn-action">🖼️ Alta resolução</button>
+          <button class="btn-action">📋 Saber mais</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template: Overlay de Agendamento -->
+  <template id="tplAgendamento">
+    <div class="agenda-overlay" id="agendaOverlay">
+      <div class="agenda-modal">
+
+        <!-- Passo 1: Data -->
+        <div class="agenda-step" id="stepData">
+          <div class="agenda-modal-header">
+            <h3>Agendar Visita</h3>
+            <button class="agenda-close-btn" onclick="fecharAgendamento()">×</button>
+          </div>
+          <div class="agenda-modal-body">
+            <p class="agenda-step-label">Selecione uma data disponível:</p>
+            <div class="agenda-dates"></div>
+          </div>
+          <div class="agenda-modal-footer">
+            <button class="agenda-btn-secondary" onclick="fecharAgendamento()">Cancelar</button>
+            <button class="agenda-btn-primary" id="btnNextHorario" disabled onclick="irParaHorario()">Próximo →</button>
+          </div>
+        </div>
+
+        <!-- Passo 2: Horário + Dados -->
+        <div class="agenda-step" id="stepHorario" style="display:none">
+          <div class="agenda-modal-header">
+            <button class="agenda-back-btn" onclick="voltarParaData()">← Voltar</button>
+            <h3>Horário e Dados</h3>
+            <button class="agenda-close-btn" onclick="fecharAgendamento()">×</button>
+          </div>
+          <div class="agenda-modal-body">
+            <p class="agenda-step-label">Data: <strong id="dataSelecionadaLabel"></strong></p>
+            <p class="agenda-step-label" style="margin-top:1rem">Selecione um horário:</p>
+            <div class="agenda-times">
+              <button class="agenda-time-btn" data-time="09:00">09:00</button>
+              <button class="agenda-time-btn" data-time="10:30">10:30</button>
+              <button class="agenda-time-btn" data-time="13:00">13:00</button>
+              <button class="agenda-time-btn" data-time="14:30">14:30</button>
+              <button class="agenda-time-btn" data-time="16:00">16:00</button>
+            </div>
+            <div class="agenda-form">
+              <input type="text" id="agendaNome" class="agenda-input" placeholder="Seu nome completo *" />
+              <input type="text" id="agendaMotivo" class="agenda-input" placeholder="Motivo da visita (opcional)" />
+            </div>
+          </div>
+          <div class="agenda-modal-footer">
+            <button class="agenda-btn-secondary" onclick="voltarParaData()">← Voltar</button>
+            <button class="agenda-btn-primary" id="btnConfirmar" disabled onclick="confirmarAgendamento()">Confirmar Visita</button>
+          </div>
+        </div>
+
+        <!-- Passo 3: Sucesso -->
+        <div class="agenda-step" id="stepSucesso" style="display:none">
+          <div class="agenda-modal-body agenda-sucesso">
+            <div class="agenda-sucesso-icon">✅</div>
+            <h3>Visita Confirmada!</h3>
+            <div class="agenda-sucesso-details">
+              <p>📅 <strong id="successData"></strong> às <strong id="successHorario"></strong></p>
+              <p>👤 <strong id="successNome"></strong></p>
+              <p>📍 Centro de Memória · Bloco A, Sala 12</p>
+            </div>
+            <p class="agenda-sucesso-info">Um e-mail de confirmação foi enviado para você.</p>
+            <button class="agenda-btn-primary" onclick="fecharAgendamento()">Fechar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </template>
 
   <script src="./script.js"></script>
 </body>
