@@ -1330,21 +1330,93 @@ footer a {
 
 footer a:hover { color: var(--vermelho-hover); }
 
+/* ── NAV HAMBURGER ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 200;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--branco);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .acervo-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .nav-links {
+    position: fixed;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: var(--preto);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 0 1rem;
+    display: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    z-index: 99;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-links li:last-child a { border-bottom: none; }
+
   .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
   .acervo-cards { grid-template-columns: 1fr; }
+
   .timeline::before { left: 18px; }
   .timeline-item,
   .timeline-item:nth-child(even) { flex-direction: row; }
-  .timeline-year { width: 44px; font-size: 0.78rem; }
+  .timeline-item:nth-child(even) .timeline-content {
+    border-left: 3px solid var(--vermelho);
+    border-right: none;
+  }
   .timeline-item:nth-child(odd),
   .timeline-item:nth-child(even) { transform: translateY(40px); }
   .timeline-item.visible { transform: translateY(0); }
-  .timeline-year { min-width: 48px; font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+  .timeline-year { min-width: 44px; font-size: 0.7rem; padding: 0.3rem 0.45rem; }
+
+  .hero-stats { gap: 1.25rem; }
+  .stat-number { font-size: 1.5rem; }
+
+  .carousel-slide { padding: 5rem 1.25rem 4rem; }
+  .carousel-arrow { display: none; }
+  .carousel-dots { bottom: 1.25rem; }
+
+  .hero-description { font-size: 0.93rem; margin-bottom: 2rem; }
+  .hero-actions { gap: 0.75rem; }
+  .btn-primary, .btn-outline { padding: 0.75rem 1.5rem; font-size: 0.82rem; }
+
   .chat-panel { width: calc(100vw - 2rem); right: 1rem; }
-  .hero-stats { gap: 1.5rem; }
   .chat-inline-layout {
     grid-template-columns: 1fr;
     height: auto;
@@ -1353,29 +1425,36 @@ footer a:hover { color: var(--vermelho-hover); }
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .chat-main {
-    height: 360px;
-  }
+  .chat-main { height: 360px; }
   .chat-modal {
     width: 100vw;
     height: 100vh;
     border-radius: 0;
   }
-  .chat-modal-layout {
-    grid-template-columns: 1fr;
-  }
-  .chat-modal-sidebar {
-    display: none;
-  }
-  .chat-modal-layout .chat-main {
-    height: 100%;
-  }
+  .chat-modal-layout { grid-template-columns: 1fr; }
+  .chat-modal-sidebar { display: none; }
+  .chat-modal-layout .chat-main { height: 100%; }
   .chat-fab {
     bottom: 1.5rem;
     right: 1.5rem;
     width: 54px;
     height: 54px;
   }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 0 1rem; }
+  .nav-logo-text { font-size: 1.1rem; letter-spacing: 0.1em; }
+  section { padding: 3.5rem 1.25rem; }
+  .hero-stats { gap: 1rem; }
+  .stat-number { font-size: 1.3rem; }
+  .stat-label { font-size: 0.65rem; }
+  .hero-badge { font-size: 0.65rem; letter-spacing: 0.1em; }
+  .timeline-year { font-size: 0.65rem; min-width: 38px; padding: 0.25rem 0.35rem; }
+  .agenda-dates { grid-template-columns: repeat(4, 1fr); }
+  .agenda-modal { max-width: 100%; }
+  .agenda-overlay { padding: 0.75rem; }
+  .chat-hint { font-size: 0.73rem; padding: 0.4rem 0.75rem; }
 }
 
 /* ═══════════════════════════════════════════════════════
