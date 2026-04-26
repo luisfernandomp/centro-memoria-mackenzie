@@ -4,6 +4,21 @@ window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('nav-scrolled', window.scrollY > 10);
 });
 
+// ── TIMELINE SCROLL ANIMATIONS ──
+(function () {
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = i * 80;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  items.forEach(item => observer.observe(item));
+}());
+
 // ── CAROUSEL ──
 (function () {
   const track = document.getElementById('carouselTrack');
