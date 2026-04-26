@@ -26,12 +26,15 @@
         ORÁCULO MACKENZIE
       </div>
     </a>
-    <ul class="nav-links">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#acervo">Acervo</a></li>
-      <li><a href="#historia">História</a></li>
-      <li><a href="#chat">Assistente</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre" onclick="closeNav()">Sobre</a></li>
+      <li><a href="#acervo" onclick="closeNav()">Acervo</a></li>
+      <li><a href="#historia" onclick="closeNav()">História</a></li>
+      <li><a href="#chat" onclick="closeNav()">Assistente</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- CAROUSEL -->
@@ -54,10 +57,10 @@
             <a href="#chat" class="btn-outline">Falar com o Assistente</a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="stat-number">150+</span><span class="stat-label">Anos de história</span></div>
-            <div class="stat"><span class="stat-number">80k+</span><span class="stat-label">Documentos</span></div>
-            <div class="stat"><span class="stat-number">5k+</span><span class="stat-label">Fotografias</span></div>
-            <div class="stat"><span class="stat-number">3k+</span><span class="stat-label">Publicações</span></div>
+            <div class="stat"><span class="stat-number">154</span><span class="stat-label">Anos de história</span></div>
+            <div class="stat"><span class="stat-number">1870</span><span class="stat-label">Fundação</span></div>
+            <div class="stat"><span class="stat-number">6</span><span class="stat-label">Coleções</span></div>
+            <div class="stat"><span class="stat-number">SP</span><span class="stat-label">São Paulo – Brasil</span></div>
           </div>
         </div>
       </div>
@@ -65,8 +68,8 @@
       <!-- Slide 2 -->
       <div class="carousel-slide slide-2">
         <div class="hero-content">
-          <div class="hero-badge">Coleção Histórica · Acervo Digital</div>
-          <h1>80.000+ Documentos<br><em>Preservados</em></h1>
+          <div class="hero-badge">Coleção Histórica · Acervo Institucional</div>
+          <h1>Documentos, Imagens<br><em>e Memórias</em></h1>
           <div class="hero-divider"></div>
           <p class="hero-subtitle">Atas, fotografias, publicações e registros</p>
           <p class="hero-description">
@@ -79,10 +82,10 @@
             <a href="#historia" class="btn-outline">Ver Linha do Tempo</a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="stat-number">80k+</span><span class="stat-label">Documentos</span></div>
-            <div class="stat"><span class="stat-number">5k+</span><span class="stat-label">Fotografias</span></div>
-            <div class="stat"><span class="stat-number">3k+</span><span class="stat-label">Publicações</span></div>
             <div class="stat"><span class="stat-number">6</span><span class="stat-label">Coleções</span></div>
+            <div class="stat"><span class="stat-number">séc. XIX</span><span class="stat-label">Documento mais antigo</span></div>
+            <div class="stat"><span class="stat-number">Digital</span><span class="stat-label">Acervo em digitalização</span></div>
+            <div class="stat"><span class="stat-number">Aberto</span><span class="stat-label">À pesquisa acadêmica</span></div>
           </div>
         </div>
       </div>
@@ -183,7 +186,7 @@
         <div class="card">
           <div class="card-icon">📷</div>
           <h3>Acervo Fotográfico</h3>
-          <p>Mais de 5.000 fotografias que registram eventos, formandos, obras e a vida cotidiana do Mackenzie.</p>
+          <p>Fotografias que registram eventos, formandos, obras e a vida cotidiana do Mackenzie ao longo de mais de um século.</p>
         </div>
         <div class="card">
           <div class="card-icon">📚</div>
