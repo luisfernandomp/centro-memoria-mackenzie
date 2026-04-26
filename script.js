@@ -1,5 +1,3 @@
-let chatOpen = false;
-
 window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('nav-scrolled', window.scrollY > 10);
 });
@@ -62,15 +60,45 @@ window.addEventListener('scroll', () => {
   startAuto();
 }());
 
-function toggleChat() {
-  chatOpen = !chatOpen;
-  const panel = document.getElementById('chatPanel');
-  const badge = document.getElementById('chatBadge');
-  panel.classList.toggle('open', chatOpen);
-  if (chatOpen) {
-    badge.style.display = 'none';
+// ── INLINE CHAT ──
+function openInlineChat() {
+  const cta = document.getElementById('chatCta');
+  const inline = document.getElementById('chatInline');
+
+  cta.classList.add('hiding');
+  setTimeout(() => {
+    cta.style.display = 'none';
+    cta.classList.remove('hiding');
+    inline.classList.add('visible');
     document.getElementById('chatInput').focus();
-  }
+  }, 280);
+}
+
+function closeInlineChat() {
+  const cta = document.getElementById('chatCta');
+  const inline = document.getElementById('chatInline');
+
+  inline.classList.remove('visible');
+  setTimeout(() => {
+    cta.style.display = '';
+    requestAnimationFrame(() => cta.classList.add('showing'));
+    setTimeout(() => cta.classList.remove('showing'), 400);
+  }, 280);
+}
+
+function openChatWithHint(el) {
+  openInlineChat();
+  setTimeout(() => {
+    const input = document.getElementById('chatInput');
+    const text = el.textContent.replace(/^[^\s]+\s/, ''); // strip emoji
+    input.value = text;
+    input.focus();
+  }, 350);
+}
+
+function sendQuickMsg(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
 }
 
 function handleKey(e) {
@@ -130,5 +158,7 @@ function getBotReply(text) {
     return 'Temos mais de 80.000 documentos digitalizados, incluindo atas, relatórios, correspondências e registros administrativos. Posso ajudá-lo a localizar um documento específico?';
   if (t.includes('aluno') || t.includes('formando') || t.includes('diploma'))
     return 'Os registros acadêmicos incluem históricos escolares e diplomas de alunos desde as primeiras décadas da instituição. Para consultas específicas, entre em contato com nossa equipe de pesquisa.';
+  if (t.includes('solicitar') || t.includes('registros acadêmicos'))
+    return 'Para solicitar registros acadêmicos históricos, entre em contato com a equipe do Centro de Memória pelo e-mail ou telefone. Há um formulário específico para requisições de pesquisa.';
   return 'Obrigado pela sua pergunta! Nossa equipe está constantemente expandindo o acervo digital. Para pesquisas detalhadas, você pode entrar em contato diretamente com o Centro de Memória ou utilizar nossa base de dados completa.';
 }
