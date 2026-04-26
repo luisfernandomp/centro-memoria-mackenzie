@@ -28,6 +28,29 @@ window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('nav-scrolled', window.scrollY > 10);
 });
 
+// ── NAV HAMBURGER ──
+function toggleNav() {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('navHamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+}
+
+// Close nav on outside click
+document.addEventListener('click', function(e) {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('navHamburger');
+  if (nav && nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+    closeNav();
+  }
+});
+
+
 // ── TIMELINE SCROLL ANIMATIONS ──
 (function () {
   const items = document.querySelectorAll('.timeline-item');
