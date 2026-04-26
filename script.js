@@ -1,3 +1,29 @@
+// ── TYPEWRITER NAV TITLE ──
+(function () {
+  const el = document.querySelector('.nav-logo-text');
+  const full = el.textContent.trim();
+  el.textContent = '';
+  el.style.borderRightColor = 'rgba(255,255,255,0.75)';
+
+  let i = 0;
+  const type = setInterval(() => {
+    el.textContent += full[i];
+    i++;
+    if (i >= full.length) {
+      clearInterval(type);
+      let blinks = 0;
+      const blink = setInterval(() => {
+        el.style.borderRightColor = blinks % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.75)';
+        blinks++;
+        if (blinks >= 8) {
+          clearInterval(blink);
+          el.style.borderRight = 'none';
+        }
+      }, 380);
+    }
+  }, 100);
+}());
+
 window.addEventListener('scroll', () => {
   document.querySelector('nav').classList.toggle('nav-scrolled', window.scrollY > 10);
 });
