@@ -148,6 +148,88 @@ function removeTyping() {
   if (el) el.remove();
 }
 
+// ── FLOATING CHAT MODAL ──
+function toggleChatModal() {
+  const overlay = document.getElementById('chatModalOverlay');
+  if (overlay.classList.contains('visible')) {
+    closeChatModal();
+  } else {
+    openChatModal();
+  }
+}
+
+function openChatModal() {
+  const overlay = document.getElementById('chatModalOverlay');
+  const fab = document.getElementById('chatFab');
+  overlay.classList.add('visible');
+  document.body.style.overflow = 'hidden';
+  fab.querySelector('.chat-fab-icon-open').style.display = 'none';
+  fab.querySelector('.chat-fab-icon-close').style.display = '';
+  setTimeout(() => document.getElementById('chatModalInput').focus(), 380);
+}
+
+function closeChatModal() {
+  const overlay = document.getElementById('chatModalOverlay');
+  const fab = document.getElementById('chatFab');
+  overlay.classList.remove('visible');
+  document.body.style.overflow = '';
+  fab.querySelector('.chat-fab-icon-open').style.display = '';
+  fab.querySelector('.chat-fab-icon-close').style.display = 'none';
+}
+
+function handleModalBackdropClick(e) {
+  if (e.target === document.getElementById('chatModalOverlay')) closeChatModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChatModal(); });
+
+function sendModalQuickMsg(text) {
+  document.getElementById('chatModalInput').value = text;
+  sendModalMessage();
+}
+
+function handleModalKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendModalMessage(); }
+}
+
+function sendModalMessage() {
+  const input = document.getElementById('chatModalInput');
+  const text = input.value.trim();
+  if (!text) return;
+  appendModalMessage(text, 'user');
+  input.value = '';
+  showModalTyping();
+  setTimeout(() => {
+    removeModalTyping();
+    appendModalMessage(getBotReply(text), 'bot');
+  }, 1200 + Math.random() * 600);
+}
+
+function appendModalMessage(text, sender) {
+  const messages = document.getElementById('chatModalMessages');
+  const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const div = document.createElement('div');
+  div.className = `msg msg-${sender}`;
+  div.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function showModalTyping() {
+  const messages = document.getElementById('chatModalMessages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-bot';
+  div.id = 'modalTypingIndicator';
+  div.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function removeModalTyping() {
+  const el = document.getElementById('modalTypingIndicator');
+  if (el) el.remove();
+}
+
 function getBotReply(text) {
   const t = text.toLowerCase();
   if (t.includes('fundação') || t.includes('1870') || t.includes('fundado'))

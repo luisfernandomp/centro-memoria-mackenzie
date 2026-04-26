@@ -281,7 +281,7 @@
           <span class="chat-hint" onclick="openChatWithHint(this)">🎓 Registros acadêmicos</span>
           <span class="chat-hint" onclick="openChatWithHint(this)">🏛️ Fundação da instituição</span>
         </div>
-        <button class="btn-open-chat" onclick="openInlineChat()">
+        <button class="btn-open-chat" onclick="openChatModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
@@ -362,6 +362,88 @@
       <a href="#">Política de Privacidade</a> · <a href="#">Contato</a> · <a href="#">Acessibilidade</a>
     </p>
   </footer>
+
+  <!-- Floating Chat Button (FAB) -->
+  <button class="chat-fab" id="chatFab" onclick="toggleChatModal()" title="Assistente de Memória">
+    <svg class="chat-fab-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <svg class="chat-fab-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <!-- Full-screen Chat Modal -->
+  <div class="chat-modal-overlay" id="chatModalOverlay" onclick="handleModalBackdropClick(event)">
+    <div class="chat-modal" id="chatModal">
+      <div class="chat-modal-layout">
+
+        <!-- Sidebar -->
+        <div class="chat-sidebar chat-modal-sidebar">
+          <div class="chat-sidebar-header">
+            <div class="chat-sidebar-avatar">M</div>
+            <div>
+              <strong>Assistente Mackenzie</strong>
+              <span>Oráculo Digital · RAG</span>
+            </div>
+          </div>
+          <div class="chat-sidebar-info">
+            <p>Faço pesquisas no acervo histórico da Universidade Presbiteriana Mackenzie.</p>
+          </div>
+          <div class="chat-sidebar-topics">
+            <div class="sidebar-topic-label">Pesquisas frequentes</div>
+            <button class="sidebar-topic" onclick="sendModalQuickMsg('Quais documentos da fundação estão disponíveis?')">Documentos da fundação</button>
+            <button class="sidebar-topic" onclick="sendModalQuickMsg('Como posso pesquisar no acervo fotográfico?')">Acervo fotográfico</button>
+            <button class="sidebar-topic" onclick="sendModalQuickMsg('Como solicitar registros acadêmicos históricos?')">Registros acadêmicos</button>
+            <button class="sidebar-topic" onclick="sendModalQuickMsg('Quando o Mackenzie foi fundado?')">História da instituição</button>
+          </div>
+          <button class="sidebar-close-btn" onclick="closeChatModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+            Fechar assistente
+          </button>
+        </div>
+
+        <!-- Chat Main -->
+        <div class="chat-main">
+          <div class="chat-modal-header">
+            <span>Assistente de Memória Mackenzie</span>
+            <button class="chat-modal-close-btn" onclick="closeChatModal()" aria-label="Fechar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="chat-main-messages" id="chatModalMessages">
+            <div class="msg msg-bot">
+              <div class="msg-bubble">
+                Olá! Sou o assistente do Centro de Memória Mackenzie. 📚<br><br>
+                Posso ajudá-lo a pesquisar documentos históricos, fotografias, publicações e responder perguntas sobre a trajetória da universidade.<br><br>
+                O que você gostaria de saber?
+              </div>
+              <div class="msg-time">Agora</div>
+            </div>
+          </div>
+          <div class="chat-main-input">
+            <textarea
+              class="chat-input"
+              id="chatModalInput"
+              rows="1"
+              placeholder="Pesquise no acervo histórico..."
+              onkeydown="handleModalKey(event)"
+            ></textarea>
+            <button class="chat-send-btn" onclick="sendModalMessage()" title="Enviar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script src="./script.js"></script>
 </body>
